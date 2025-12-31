@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Kanban - Beautiful, Private Project Management | Free Kanban Board</title>
+    <meta name="description" content="The most beautiful kanban board you'll ever use. No account required, 100% private, free forever. Organize your projects without giving up your privacy.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink-600: #ec4899;
+            --pink-500: #f472b6;
+            --purple-600: #9333ea;
+            --purple-500: #a855f7;
+            --gray-900: #111827;
+            --gray-700: #374151;
+            --gray-500: #6b7280;
+            --gray-100: #f3f4f6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--gray-900);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 16px 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--pink-600), var(--purple-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--pink-600), var(--purple-600));
+            color: white;
+            padding: 12px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+        }
+
+        .cta-button-secondary {
+            background: white;
+            color: var(--pink-600);
+            border: 2px solid var(--pink-600);
+            padding: 10px 26px;
+        }
+
+        .cta-button-secondary:hover {
+            background: var(--gray-100);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 100%);
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--pink-600), var(--purple-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: var(--gray-700);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--gray-900);
+        }
+
+        .section-header p {
+            font-size: 20px;
+            color: var(--gray-500);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(236, 72, 153, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--gray-900);
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            color: var(--gray-500);
+            line-height: 1.7;
+        }
+
+        /* How It Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--pink-600), var(--purple-600));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 auto 24px;
+        }
+
+        .step h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .step p {
+            color: var(--gray-500);
+            font-size: 16px;
+        }
+
+        .step-image {
+            width: 100%;
+            height: 200px;
+            background: var(--gray-100);
+            border-radius: 12px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-500);
+            font-size: 14px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--gray-100);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            color: var(--gray-700);
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--pink-500), var(--purple-500));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .author-title {
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+
+        /* Privacy Section */
+        .privacy-section {
+            background: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 100%);
+        }
+
+        .privacy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .privacy-card {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 16px;
+        }
+
+        .privacy-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .privacy-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .privacy-card p {
+            color: var(--gray-500);
+            font-size: 16px;
+        }
+
+        /* FAQ Section */
+        .faq-list {
+            max-width: 800px;
+            margin: 60px auto 0;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--gray-900);
+        }
+
+        .faq-answer {
+            font-size: 16px;
+            color: var(--gray-500);
+            line-height: 1.7;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: linear-gradient(135deg, var(--pink-600), var(--purple-600));
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .final-cta h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .final-cta p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .final-cta .cta-button {
+            background: white;
+            color: var(--pink-600);
+            font-size: 18px;
+            padding: 16px 40px;
+        }
+
+        .final-cta .trust-line {
+            margin-top: 24px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-section a {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+            }
+
+            .section-header h2 {
+                font-size: 36px;
+            }
+
+            .features-grid, .steps, .testimonials-grid, .privacy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .final-cta h2 {
+                font-size: 36px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Vibe Kanban</div>
+                <a href="#app" class="cta-button">Start Organizing Now →</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Beautiful Project Management<br>That Respects Your Privacy</h1>
+                <p>The most elegant way to organize your projects. No account, no tracking, just pure productivity.</p>
+
+                <div class="hero-ctas">
+                    <a href="#app" class="cta-button">Start Organizing Now →</a>
+                    <a href="#how-it-works" class="cta-button cta-button-secondary">See How It Works ↓</a>
+                </div>
+
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <span>✨</span>
+                        <span>No signup required</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span>🔒</span>
+                        <span>100% private</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span>💸</span>
+                        <span>Free forever</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everything you need. Nothing you don't.</h2>
+                <p>Simple, powerful, and built with care for your privacy</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">✨</span>
+                    <h3>No Account Required</h3>
+                    <p>Open the app and start organizing in seconds. No email, no password, no verification waiting period. Just click and go.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🔒</span>
+                    <h3>Your Data Stays Yours</h3>
+                    <p>Everything is stored locally in your browser. We literally can't see your data because we never receive it. Zero tracking, zero servers.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🎨</span>
+                    <h3>Designed to Spark Joy</h3>
+                    <p>Gorgeous pink and purple gradients that make project management actually enjoyable. Smooth animations and delightful interactions.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">⚡️</span>
+                    <h3>Lightning Fast</h3>
+                    <p>No server round-trips means instant interactions. Drag a card and feel the GPU-accelerated smoothness.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">⌨️</span>
+                    <h3>Keyboard Navigation</h3>
+                    <p>Full keyboard support for power users. Tab, Enter, arrows - everything just works. Accessibility built in.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">💸</span>
+                    <h3>Free. Forever.</h3>
+                    <p>No freemium tricks. No upgrade popups. No features locked behind paywalls. Everything is free, always.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" style="background: var(--gray-100);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Simple, powerful, beautiful</h2>
+                <p>Get started in three easy steps</p>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Create Columns</h3>
+                    <p>Start with a few columns like "To Do," "Doing," and "Done." Double-click to rename. Click × to delete.</p>
+                    <div class="step-image">[Screenshot: Creating columns]</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Add Cards</h3>
+                    <p>Click "+ Add Card" at the bottom of any column. Type your task and press Enter. Click any card to add detailed notes.</p>
+                    <div class="step-image">[Screenshot: Adding cards]</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Drag to Organize</h3>
+                    <p>Move cards between columns with smooth drag-and-drop. Watch your progress flow across the board.</p>
+                    <div class="step-image">[GIF: Dragging cards]</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Loved by designers, developers, and doers</h2>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p class="testimonial-text">"Finally, a kanban tool that doesn't make me create another account. This is beautiful and blazing fast."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SC</div>
+                        <div class="author-info">
+                            <div class="author-name">Sarah Chen</div>
+                            <div class="author-title">Product Designer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">"The privacy-first approach is exactly what I've been looking for. My data stays mine."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <div class="author-name">Marcus Rodriguez</div>
+                            <div class="author-title">Freelance Developer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">"I've tried every productivity tool out there. Vibe is the only one I actually enjoy using."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">ET</div>
+                        <div class="author-info">
+                            <div class="author-name">Emma Thompson</div>
+                            <div class="author-title">Content Creator</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">"Simple enough for personal tasks, powerful enough for client projects. Perfect balance."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DP</div>
+                        <div class="author-info">
+                            <div class="author-name">David Park</div>
+                            <div class="author-title">Consultant</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">"The design is gorgeous. It makes me want to organize things just to look at it."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PS</div>
+                        <div class="author-info">
+                            <div class="author-name">Priya Sharma</div>
+                            <div class="author-title">UX Designer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">"Switched from Trello and never looked back. Faster, prettier, and actually respects my privacy."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JW</div>
+                        <div class="author-info">
+                            <div class="author-name">James Wilson</div>
+                            <div class="author-title">Indie Hacker</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Section -->
+    <section class="privacy-section" id="privacy">
+        <div class="container">
+            <div class="section-header">
+                <h2>Your privacy isn't a premium feature</h2>
+                <p>We built Vibe with privacy at its core</p>
+            </div>
+
+            <div class="privacy-grid">
+                <div class="privacy-card">
+                    <div class="privacy-icon">🔒</div>
+                    <h3>Local Storage Only</h3>
+                    <p>All your data lives in your browser's local storage. No cloud servers, no databases, no external storage.</p>
+                </div>
+
+                <div class="privacy-card">
+                    <div class="privacy-icon">🚫</div>
+                    <h3>Zero Tracking</h3>
+                    <p>We don't use analytics, cookies, tracking pixels, or any data collection. We literally don't know who you are.</p>
+                </div>
+
+                <div class="privacy-card">
+                    <div class="privacy-icon">🛡️</div>
+                    <h3>No Data Breaches</h3>
+                    <p>Can't breach what we don't have. Your data never touches our servers because we don't have servers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Questions? Answers.</h2>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">Do I really not need an account?</div>
+                    <div class="faq-answer">Nope! Just open the app and start organizing. No email, no password, nothing. We designed it to be as frictionless as possible.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Where is my data stored?</div>
+                    <div class="faq-answer">Everything is stored in your browser's local storage. It never leaves your device. This means perfect privacy but also means you can't access it from a different browser/device yet.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Will it always be free?</div>
+                    <div class="faq-answer">Yes. Since we don't have server costs (everything runs in your browser), we can keep it free forever. We might add optional paid features in the future, but the core will always be free.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Can I use it for team collaboration?</div>
+                    <div class="faq-answer">Not yet! Right now Vibe is designed for solo use. We're exploring privacy-respecting collaboration features for the future.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What browsers does it work on?</div>
+                    <div class="faq-answer">Chrome, Firefox, Safari, Edge - all modern browsers work great. Mobile browsers too!</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Is my data really private?</div>
+                    <div class="faq-answer">Absolutely. We don't have servers to store your data on. It's architecturally impossible for us to see your tasks. You don't even need to trust us - the code proves it.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Ready to organize beautifully?</h2>
+            <p>Join thousands of people who've ditched bloated tools for something simple, fast, and private.</p>
+            <a href="#app" class="cta-button">Start Organizing Now - It's Free →</a>
+            <div class="trust-line">No signup required • No credit card needed • No catch</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Vibe Kanban</h4>
+                    <p style="color: rgba(255, 255, 255, 0.7); font-size: 14px;">Beautiful project management that respects your privacy.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#privacy">Privacy</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <a href="#">Twitter</a>
+                    <a href="#">GitHub</a>
+                    <a href="#">ProductHunt</a>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <a href="#">Privacy (We don't collect data)</a>
+                    <a href="#">Terms (Use it however you want)</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                Made with 💜 by the Vibe team • No tracking, no cookies, no nonsense
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .step, .testimonial, .privacy-card, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
