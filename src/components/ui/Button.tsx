@@ -19,9 +19,9 @@ export function Button({
   const baseStyles = 'font-medium rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
 
   const variantStyles = {
-    primary: 'bg-gradient-vibe-intense text-white shadow-vibe hover:shadow-vibe-lg active:scale-95',
-    secondary: 'bg-white/80 text-gray-800 border border-gray-200 hover:bg-white shadow-vibe',
-    outline: 'border-2 border-dashed border-vibe-pink-300 text-gray-700 hover:border-vibe-purple-400 hover:text-gray-900 transition-colors',
+    primary: 'bg-gradient-vibe-intense text-white shadow-vibe hover:shadow-vibe-lg active:scale-95 dark:shadow-lg dark:hover:shadow-xl',
+    secondary: 'bg-white/80 text-gray-800 border border-gray-200 hover:bg-white shadow-vibe dark:bg-gray-800/80 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800',
+    outline: 'border-2 border-dashed border-vibe-pink-300 text-gray-700 hover:border-vibe-purple-400 hover:text-gray-900 transition-colors dark:border-vibe-pink-600 dark:text-gray-300 dark:hover:border-vibe-purple-500 dark:hover:text-gray-100',
   }
 
   const sizeStyles = {

@@ -1,16 +1,14 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
-import { generateId } from '@/lib/utils'
 
 interface AddCardButtonProps {
   columnId: string
   onAdd: (title: string) => void
 }
 
-export function AddCardButton({ columnId, onAdd }: AddCardButtonProps) {
+export function AddCardButton({ columnId: _columnId, onAdd }: AddCardButtonProps) {
   const [isAdding, setIsAdding] = useState(false)
   const [title, setTitle] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
@@ -52,7 +50,7 @@ export function AddCardButton({ columnId, onAdd }: AddCardButtonProps) {
         <div className="flex gap-2">
           <button
             onClick={handleAdd}
-            className="flex-1 px-3 py-1.5 bg-gradient-vibe-intense text-white rounded-lg text-sm font-medium hover:shadow-vibe transition-shadow"
+            className="flex-1 px-3 py-1.5 bg-gradient-vibe-intense text-white rounded-lg text-sm font-medium hover:shadow-vibe transition-shadow dark:shadow-lg dark:hover:shadow-xl"
           >
             Add
           </button>
@@ -61,7 +59,7 @@ export function AddCardButton({ columnId, onAdd }: AddCardButtonProps) {
               setIsAdding(false)
               setTitle('')
             }}
-            className="flex-1 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+            className="flex-1 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
           >
             Cancel
           </button>
@@ -73,7 +71,7 @@ export function AddCardButton({ columnId, onAdd }: AddCardButtonProps) {
   return (
     <button
       onClick={() => setIsAdding(true)}
-      className="w-full px-3 py-2 text-sm font-medium text-gray-600 hover:text-vibe-purple-600 border-2 border-dashed border-gray-300 hover:border-vibe-purple-300 rounded-lg transition-colors hover:bg-vibe-purple-50/30"
+      className="w-full px-3 py-2 text-sm font-medium text-gray-600 hover:text-vibe-purple-600 border-2 border-dashed border-gray-300 hover:border-vibe-purple-300 rounded-lg transition-colors hover:bg-vibe-purple-50/30 dark:text-gray-400 dark:hover:text-vibe-purple-400 dark:border-gray-600 dark:hover:border-vibe-purple-500 dark:hover:bg-vibe-purple-900/20"
     >
       + Add Card
     </button>

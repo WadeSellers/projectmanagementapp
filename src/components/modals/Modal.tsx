@@ -34,15 +34,15 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-fade-in"
+        className="absolute inset-0 bg-black/40 dark:bg-black/70 backdrop-blur-sm animate-fade-in"
         onClick={onClose}
       />
 
       {/* Modal */}
-      <div className="relative z-10 w-full max-w-md mx-4 bg-white rounded-2xl shadow-2xl animate-scale-in">
+      <div className="relative z-10 w-full max-w-md mx-4 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl animate-scale-in">
         {title && (
-          <div className="px-6 py-4 border-b border-gray-100">
-            <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+          <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">{title}</h2>
           </div>
         )}
         <div className="p-6">

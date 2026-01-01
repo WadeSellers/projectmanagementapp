@@ -35,7 +35,7 @@ export function Column({
   return (
     <div
       ref={setNodeRef}
-      className="w-80 flex-shrink-0 bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-md border-2 border-gray-200 h-fit max-h-[calc(100vh-120px)] flex flex-col custom-scrollbar"
+      className="w-80 flex-shrink-0 bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-md border-2 border-gray-200 h-fit max-h-[calc(100vh-120px)] flex flex-col custom-scrollbar dark:bg-gray-800/90 dark:border-gray-700"
     >
       <ColumnHeader
         column={column}
@@ -59,7 +59,7 @@ export function Column({
         </div>
       </SortableContext>
 
-      <div className="mt-2 pt-2 border-t border-gray-100">
+      <div className="mt-2 pt-2 border-t border-gray-100 dark:border-gray-700">
         <AddCardButton
           columnId={column.id}
           onAdd={(title) => onAddCard(title)}

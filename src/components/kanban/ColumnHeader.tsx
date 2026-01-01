@@ -47,24 +47,24 @@ export function ColumnHeader({ column, onUpdate, onDelete }: ColumnHeaderProps) 
   }
 
   return (
-    <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+    <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-700">
       <div className="flex-1">
         <h2
           onDoubleClick={() => setIsEditing(true)}
           className={cn(
-            'text-sm font-bold text-gray-900 cursor-pointer uppercase tracking-wide',
-            'hover:text-vibe-purple-600 transition-colors'
+            'text-sm font-bold text-gray-900 dark:text-gray-100 cursor-pointer uppercase tracking-wide',
+            'hover:text-vibe-purple-600 dark:hover:text-vibe-purple-400 transition-colors'
           )}
         >
           {column.title}
         </h2>
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           {column.cards.length} {column.cards.length === 1 ? 'task' : 'tasks'}
         </p>
       </div>
       <button
         onClick={onDelete}
-        className="text-gray-400 hover:text-red-500 transition-colors text-lg flex-shrink-0 ml-2"
+        className="text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors text-lg flex-shrink-0 ml-2"
         title="Delete column"
       >
         ×

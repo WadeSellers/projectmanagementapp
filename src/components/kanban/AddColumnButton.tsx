@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 
 interface AddColumnButtonProps {
@@ -52,7 +51,7 @@ export function AddColumnButton({ onAdd, existingTitles }: AddColumnButtonProps)
 
   if (isAdding) {
     return (
-      <div className="w-80 flex-shrink-0 bg-gray-50/50 backdrop-blur-sm rounded-xl p-3 shadow-sm border border-gray-100">
+      <div className="w-80 flex-shrink-0 bg-gray-50/50 backdrop-blur-sm rounded-xl p-3 shadow-sm border border-gray-100 dark:bg-gray-800/50 dark:border-gray-700">
         <div className="space-y-2">
           <Input
             ref={inputRef}
@@ -67,12 +66,12 @@ export function AddColumnButton({ onAdd, existingTitles }: AddColumnButtonProps)
             className="text-sm"
           />
           {error && (
-            <p className="text-xs text-red-500">{error}</p>
+            <p className="text-xs text-red-500 dark:text-red-400">{error}</p>
           )}
           <div className="flex gap-2">
             <button
               onClick={handleAdd}
-              className="flex-1 px-3 py-1.5 bg-gradient-vibe-intense text-white rounded-lg text-sm font-medium hover:shadow-vibe transition-shadow"
+              className="flex-1 px-3 py-1.5 bg-gradient-vibe-intense text-white rounded-lg text-sm font-medium hover:shadow-vibe transition-shadow dark:shadow-lg dark:hover:shadow-xl"
             >
               Create
             </button>
@@ -82,7 +81,7 @@ export function AddColumnButton({ onAdd, existingTitles }: AddColumnButtonProps)
                 setTitle('')
                 setError('')
               }}
-              className="flex-1 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+              className="flex-1 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
             >
               Cancel
             </button>
@@ -96,7 +95,7 @@ export function AddColumnButton({ onAdd, existingTitles }: AddColumnButtonProps)
     <div className="w-80 flex-shrink-0">
       <button
         onClick={() => setIsAdding(true)}
-        className="w-full px-3 py-2 text-sm font-medium text-gray-600 hover:text-vibe-purple-600 border-2 border-dashed border-gray-300 hover:border-vibe-purple-300 rounded-lg transition-colors hover:bg-vibe-purple-50/30 bg-gray-50/50"
+        className="w-full px-3 py-2 text-sm font-medium text-gray-600 hover:text-vibe-purple-600 border-2 border-dashed border-gray-300 hover:border-vibe-purple-300 rounded-lg transition-colors hover:bg-vibe-purple-50/30 bg-gray-50/50 dark:text-gray-400 dark:hover:text-vibe-purple-400 dark:border-gray-600 dark:hover:border-vibe-purple-500 dark:hover:bg-vibe-purple-900/20 dark:bg-gray-800/50"
       >
         + Add Column
       </button>

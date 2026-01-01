@@ -13,7 +13,7 @@ import {
   useSensors,
 } from '@dnd-kit/core'
 import { sortableKeyboardCoordinates } from '@dnd-kit/sortable'
-import { BoardData, Card as CardType, Column as ColumnType } from '@/types'
+import { Card as CardType, Column as ColumnType } from '@/types'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { useHydration } from '@/hooks/useHydration'
 import { DEFAULT_COLUMNS } from '@/lib/constants'
@@ -49,7 +49,7 @@ export function KanbanBoard() {
   const handleDragStart = (event: DragStartEvent) => {
     const { active } = event
     const card = findCardById(active.id.toString())
-    setActiveCard(card)
+    setActiveCard(card || null)
   }
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -80,9 +80,6 @@ export function KanbanBoard() {
       const targetCard = findCardById(overId)
       if (targetCard) {
         targetColumnId = targetCard.columnId
-        const columnCards = boardData.columns
-          .find(col => col.id === targetColumnId)
-          ?.cards.sort((a, b) => a.order - b.order) || []
         targetOrder = targetCard.order
       }
     }

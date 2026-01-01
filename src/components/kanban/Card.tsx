@@ -44,21 +44,22 @@ export const Card = ({ card, isDragging = false, onClick, onDelete }: CardProps)
       onMouseLeave={() => setIsHovering(false)}
       className={cn(
         'bg-gradient-to-br from-amber-50 to-yellow-50',
+        'dark:from-gray-700 dark:to-gray-750',
         'rounded-lg p-3 shadow-md cursor-grab active:cursor-grabbing',
         'hover:shadow-lg transition-all duration-200',
-        'border-2 border-amber-200',
+        'border-2 border-amber-200 dark:border-gray-600',
         'hover:scale-[1.02] group',
-        isDragging && 'rotate-2 scale-105 shadow-lg ring-2 ring-vibe-purple-400 border-amber-300',
+        isDragging && 'rotate-2 scale-105 shadow-lg ring-2 ring-vibe-purple-400 border-amber-300 dark:ring-vibe-purple-500',
         isSortableDragging && 'opacity-50'
       )}
     >
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1 min-w-0" onClick={onClick}>
-          <h3 className="font-semibold text-gray-900 text-sm leading-tight break-words">
+          <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm leading-tight break-words">
             {card.title}
           </h3>
           {card.description && (
-            <p className="text-xs text-gray-500 mt-1.5 line-clamp-2">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1.5 line-clamp-2">
               {card.description}
             </p>
           )}
@@ -74,7 +75,7 @@ export const Card = ({ card, isDragging = false, onClick, onDelete }: CardProps)
               e.stopPropagation()
               onClick?.()
             }}
-            className="p-1 text-gray-400 hover:text-vibe-purple-600 hover:bg-vibe-purple-50 rounded transition-colors"
+            className="p-1 text-gray-400 hover:text-vibe-purple-600 hover:bg-vibe-purple-50 dark:hover:bg-vibe-purple-900/30 dark:hover:text-vibe-purple-400 rounded transition-colors"
             title="Edit card"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +87,7 @@ export const Card = ({ card, isDragging = false, onClick, onDelete }: CardProps)
               e.stopPropagation()
               onDelete?.()
             }}
-            className="p-1 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors"
+            className="p-1 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 dark:hover:text-red-400 rounded transition-colors"
             title="Delete card"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
